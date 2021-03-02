@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DefaultView from "./layout/default";
+import DefaultView from "./layout/default/index.vue";
 export default {
   components: {
     DefaultView
@@ -16,17 +16,8 @@ export default {
 <style>
 #app {
   overflow: hidden;
+  min-width: 1366px;
   width: 100%;
   height: 100%;
-}
-.container {
-  display: flex;
-  /* flex-direction: column; */
-  height: calc(100% - 64px);
-}
-.content-wrap {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 }
 </style>

@@ -1,3 +1,12 @@
+/*
+ * @author       : shuwang.wu@getech.cn
+ * @createdDate  : 2021-02-25 16:18:00
+ * @version      : 1.0
+ * @modifier     : shuwang.wu@getech.cn
+ * @modifiedDate : 2021-03-02 17:16:05
+ * @reason       : https://vitejs.dev/config/
+ * @FilePath     : \vite-demo\vite.config.js
+ */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
@@ -5,17 +14,43 @@ import { resolve } from "path";
 function pathResolve(dir) {
   return resolve(__dirname, ".", dir);
 }
+console.log(pathResolve("src/views"));
 
-// https://vitejs.dev/config/
 export default defineConfig({
+  root: process.cwd(),
   resolve: {
-    alias: {
-      "/@/": pathResolve("src")
-    }
+    alias: [
+      {
+        find: /^\/@\//,
+        replacement: pathResolve("src") + "/"
+      },
+      {
+        find: /^\/@views\//,
+        replacement: pathResolve("src/views") + "/"
+      },
+      {
+        find: /^\/@components\//,
+        replacement: pathResolve("src/components") + "/"
+      },
+      {
+        find: /^\/@utils\//,
+        replacement: pathResolve("src/utils") + "/"
+      }
+    ]
   },
-  cssPreprocessOptions: {
-    less: {
-      javascriptEnabled: true
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: {
+          // Used for global import to avoid the need to import each style file separately
+          // reference:  Avoid repeated references
+          // hack: `true; @import (reference) "${resolve(
+          //   "src/design/config.less"
+          // )}";`
+          // ...generateModifyVars()
+        },
+        javascriptEnabled: true
+      }
     }
   },
   optimizeDeps: {

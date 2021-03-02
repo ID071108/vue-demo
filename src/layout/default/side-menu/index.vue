@@ -3,58 +3,46 @@
  * @createdDate  : 2021-02-25 16:45:22
  * @version      : 1.0
  * @modifier     : shuwang.wu@getech.cn
- * @modifiedDate : 2021-02-26 15:05:39
+ * @modifiedDate : 2021-03-02 18:24:51
  * @reason       : 
  * @FilePath     : \vite-demo\src\layout\default\side-menu\index.vue
 -->
 <template>
   <div class="menu-wrap">
-    <a-menu
-      mode="inline"
-      theme="dark"
-      style="width: 200px;"
-      :inline-collapsed="collapsed"
-      v-model:openKeys="openKeys"
-      v-model:selectedKeys="selectedKeys"
-    >
+    <a-menu theme="dark" v-model:selectedKeys="selectedKeys" mode="inline">
       <a-menu-item key="1">
-        <PieChartOutlined />
+        <pie-chart-outlined />
         <span>Option 1</span>
       </a-menu-item>
       <a-menu-item key="2">
-        <DesktopOutlined />
+        <desktop-outlined />
         <span>Option 2</span>
-      </a-menu-item>
-      <a-menu-item key="3">
-        <InboxOutlined />
-        <span>Option 3</span>
       </a-menu-item>
       <a-sub-menu key="sub1">
         <template #title>
           <span>
-            <MailOutlined />
-            <span>Navigation One</span>
+            <user-outlined />
+            <span>User</span>
           </span>
         </template>
-        <a-menu-item key="5">Option 5</a-menu-item>
-        <a-menu-item key="6">Option 6</a-menu-item>
-        <a-menu-item key="7">Option 7</a-menu-item>
-        <a-menu-item key="8">Option 8</a-menu-item>
+        <a-menu-item key="3">Tom</a-menu-item>
+        <a-menu-item key="4">Bill</a-menu-item>
+        <a-menu-item key="5">Alex</a-menu-item>
       </a-sub-menu>
       <a-sub-menu key="sub2">
         <template #title>
           <span>
-            <AppstoreOutlined />
-            <span>Navigation Two</span>
+            <team-outlined />
+            <span>Team</span>
           </span>
         </template>
-        <a-menu-item key="9">Option 9</a-menu-item>
-        <a-menu-item key="10">Option 10</a-menu-item>
-        <a-sub-menu key="sub3" title="Submenu">
-          <a-menu-item key="11">Option 11</a-menu-item>
-          <a-menu-item key="12">Option 12</a-menu-item>
-        </a-sub-menu>
+        <a-menu-item key="6">Team 1</a-menu-item>
+        <a-menu-item key="8">Team 2</a-menu-item>
       </a-sub-menu>
+      <a-menu-item key="9">
+        <file-outlined />
+        <span>File</span>
+      </a-menu-item>
     </a-menu>
   </div>
 </template>
@@ -64,10 +52,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .menu-wrap {
-  /* width: 200px; */
   height: 100%;
-  background-color: #001529;
 }
 </style>

@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import "ant-design-vue/dist/antd.css";
 import { registerComps } from "./utils/register-comps";
 import router, { setupRouter } from "./router";
+import { setupStore } from "/@/store";
 import { isDevMode } from "./utils/env";
 import App from "./App.vue";
 
@@ -12,6 +13,9 @@ registerComps(app);
 
 // Configure routing
 setupRouter(app);
+
+// Configure vuex store
+setupStore(app);
 
 // Mount when the route is ready
 router.isReady().then(() => {
