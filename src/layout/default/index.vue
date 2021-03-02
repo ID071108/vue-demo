@@ -8,9 +8,11 @@
       <a-layout-header class="layout-header" />
       <a-layout-content class="layout-content">
         <div class="breadcrumb-wrap">
-          <a-breadcrumb class="breadcrumb">
-            <a-breadcrumb-item>User</a-breadcrumb-item>
-            <a-breadcrumb-item>Bill</a-breadcrumb-item>
+          <a-breadcrumb separator=">">
+            <a-breadcrumb-item>Home</a-breadcrumb-item>
+            <a-breadcrumb-item href="">Application Center</a-breadcrumb-item>
+            <a-breadcrumb-item href="">Application List</a-breadcrumb-item>
+            <a-breadcrumb-item>An Application</a-breadcrumb-item>
           </a-breadcrumb>
         </div>
         <div
