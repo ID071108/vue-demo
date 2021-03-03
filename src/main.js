@@ -1,12 +1,19 @@
 import { createApp } from "vue";
 import "ant-design-vue/dist/antd.css";
-import { registerComps } from "./utils/register-comps";
+import { setGlobalProperties } from "/@/utils/global-properties";
+import { registerComps } from "/@/utils/register-components";
 import router, { setupRouter } from "./router";
 import { setupStore } from "/@/store";
 import { isDevMode } from "./utils/env";
 import App from "./App.vue";
 
 const app = createApp(App);
+
+// 生产环境不展示提示
+app.config.productionTip = false;
+
+// configure global properties
+setGlobalProperties(app);
 
 // Register global components
 registerComps(app);

@@ -3,29 +3,12 @@
  * @createdDate  : 2021-02-25 16:45:22
  * @version      : 1.0
  * @modifier     : shuwang.wu@getech.cn
- * @modifiedDate : 2021-03-02 16:24:52
+ * @modifiedDate : 2021-03-03 16:36:57
  * @reason       : 
  * @FilePath     : \vite-demo\src\layout\default\content\index.vue
 -->
 <template>
-  <div class="content">
-    <div class="breadcrumb-wrap">
-      <a-button>切换</a-button>
-      <a-breadcrumb>
-        <a-breadcrumb-item href="">
-          <home-outlined />
-        </a-breadcrumb-item>
-        <a-breadcrumb-item href="">
-          <user-outlined />
-          <span>Application List</span>
-        </a-breadcrumb-item>
-        <a-breadcrumb-item>Application</a-breadcrumb-item>
-      </a-breadcrumb>
-    </div>
-    <div class="main">
-      <router-view />
-    </div>
-  </div>
+  <div class="content"><slot></slot></div>
 </template>
 <script>
 export default {
@@ -35,7 +18,10 @@ export default {
 
 <style  scoped>
 .content {
-  height: 100%;
+  height: calc(100% - 38px);
+  padding: 16px;
+  border-radius: 6px;
+  background-color: #fff;
 }
 .breadcrumb-wrap {
   display: flex;

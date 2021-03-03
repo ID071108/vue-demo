@@ -2,33 +2,40 @@
   <a-layout class="default-view">
     <a-layout-sider v-model:collapsed="collapsed" collapsible>
       <div class="logo">EMS</div>
+      <!-- 侧边栏组件 -->
       <SideMenu />
+      <side-menu />
     </a-layout-sider>
     <a-layout>
-      <a-layout-header class="layout-header" />
+      <a-layout-header class="layout-header">
+        <!-- 顶部导航栏 -->
+        <Nav />
+      </a-layout-header>
       <a-layout-content class="layout-content">
         <div class="breadcrumb-wrap">
-          <a-breadcrumb separator=">">
-            <a-breadcrumb-item>Home</a-breadcrumb-item>
-            <a-breadcrumb-item href="">Application Center</a-breadcrumb-item>
-            <a-breadcrumb-item href="">Application List</a-breadcrumb-item>
-            <a-breadcrumb-item>An Application</a-breadcrumb-item>
-          </a-breadcrumb>
+          <!-- 面包屑组件 -->
+          <Breadcrumb />
         </div>
-        <div
-          :style="{ padding: '24px', background: '#fff', minHeight: '360px' }"
-        >
+        <!-- 主体内容 -->
+        <Content>
           <router-view></router-view>
-        </div>
+        </Content>
       </a-layout-content>
       <a-layout-footer class="layout-footer" style="text-align: center">
-        EMS ©2021 Created by Getech
+        <!-- 脚部组件 -->
+        <Footer />
       </a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
-<script>
+<script setup>
+import { ref } from "vue";
+// 引用组件 start
+import Breadcrumb from "./breadcrumb/index.vue";
 import SideMenu from "./side-menu/index.vue";
+import Nav from "./nav/index.vue";
+import Content from "./content/index.vue";
+import Footer from "./footer/index.vue";
 import {
   PieChartOutlined,
   DesktopOutlined,
@@ -36,26 +43,11 @@ import {
   TeamOutlined,
   FileOutlined
 } from "@ant-design/icons-vue";
-import { defineComponent, ref } from "vue";
-export default defineComponent({
-  components: {
-    SideMenu,
-    PieChartOutlined,
-    DesktopOutlined,
-    UserOutlined,
-    TeamOutlined,
-    FileOutlined
-  },
-  data() {
-    return {
-      collapsed: false,
-      selectedKeys: ["1"]
-    };
-  }
-});
+
+const collapsed = ref(false);
 </script>
 <style lang="less" scoped>
-@deep: ~">>>";
+@deep: ~":deep()";
 .default-view {
   min-height: 100vh;
 }
@@ -71,6 +63,7 @@ export default defineComponent({
 .layout-content {
   padding: 0 24px;
   .breadcrumb-wrap {
+    height: 22px;
     margin: 8px 0;
   }
 }

@@ -3,53 +3,66 @@
  * @createdDate  : 2021-02-25 16:45:22
  * @version      : 1.0
  * @modifier     : shuwang.wu@getech.cn
- * @modifiedDate : 2021-03-02 18:24:51
+ * @modifiedDate : 2021-03-03 17:37:46
  * @reason       : 
  * @FilePath     : \vite-demo\src\layout\default\side-menu\index.vue
 -->
 <template>
   <div class="menu-wrap">
-    <a-menu theme="dark" v-model:selectedKeys="selectedKeys" mode="inline">
-      <a-menu-item key="1">
-        <pie-chart-outlined />
-        <span>Option 1</span>
-      </a-menu-item>
-      <a-menu-item key="2">
-        <desktop-outlined />
-        <span>Option 2</span>
-      </a-menu-item>
-      <a-sub-menu key="sub1">
-        <template #title>
-          <span>
-            <user-outlined />
-            <span>User</span>
-          </span>
-        </template>
-        <a-menu-item key="3">Tom</a-menu-item>
-        <a-menu-item key="4">Bill</a-menu-item>
-        <a-menu-item key="5">Alex</a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu key="sub2">
-        <template #title>
-          <span>
-            <team-outlined />
-            <span>Team</span>
-          </span>
-        </template>
-        <a-menu-item key="6">Team 1</a-menu-item>
-        <a-menu-item key="8">Team 2</a-menu-item>
-      </a-sub-menu>
-      <a-menu-item key="9">
-        <file-outlined />
-        <span>File</span>
-      </a-menu-item>
+    <a-menu
+      theme="dark"
+      mode="inline"
+      v-model:selectedKeys="selectedKeys"
+      @click="toggle"
+    >
+      <div v-for="route in routes" :key="route.path">
+        <a-sub-menu
+          :key="route.path"
+          v-if="route.children && route.children.length > 0"
+        >
+          <template #title>
+            <span>
+              <!-- <user-outlined /> -->
+              <span>{{ route.meta.title }}</span>
+            </span>
+          </template>
+          <a-menu-item
+            v-for="childItem in route.children"
+            :key="childItem.path"
+            >{{ childItem.meta.title }}</a-menu-item
+          >
+        </a-sub-menu>
+        <a-menu-item :key="route.path" v-else>
+          <!-- <pie-chart-outlined /> -->
+          <span>{{ route.meta.title }}</span>
+        </a-menu-item>
+      </div>
     </a-menu>
   </div>
 </template>
-<script>
-export default {
-  name: "SideMenu"
+<script setup>
+import { useRouter, useRoute } from "vue-router";
+import routes from "/@router/routes";
+import { ref, toRaw, watch } from "vue";
+const selectedKeys = ref(["1"]);
+// 获取路由实例
+const router = useRouter();
+const route = useRoute();
+const toggle = (value) => {
+  router.push({
+    path: value.key
+  });
 };
+watch(
+  () => route,
+  (to) => {
+    selectedKeys.value = [to.path];
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+);
 </script>
 
 <style lang="less" scoped>

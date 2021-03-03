@@ -3,7 +3,7 @@
  * @createdDate  : 2021-02-25 16:18:00
  * @version      : 1.0
  * @modifier     : shuwang.wu@getech.cn
- * @modifiedDate : 2021-03-02 17:16:05
+ * @modifiedDate : 2021-03-03 16:49:12
  * @reason       : https://vitejs.dev/config/
  * @FilePath     : \vite-demo\vite.config.js
  */
@@ -11,10 +11,14 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 
+/**
+ * @name 解析文件路径
+ * @param {String} dir 文件路径
+ * @return {String} 返回文件的绝对路径
+ */
 function pathResolve(dir) {
   return resolve(__dirname, ".", dir);
 }
-console.log(pathResolve("src/views"));
 
 export default defineConfig({
   root: process.cwd(),
@@ -35,6 +39,10 @@ export default defineConfig({
       {
         find: /^\/@utils\//,
         replacement: pathResolve("src/utils") + "/"
+      },
+      {
+        find: /^\/@router\//,
+        replacement: pathResolve("src/router") + "/"
       }
     ]
   },

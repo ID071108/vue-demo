@@ -1,29 +1,16 @@
 <template>
   <div id="app">
-    <default-view />
+    <a-config-provider :locale="locale">
+      <default-view />
+    </a-config-provider>
   </div>
 </template>
 
-<script>
+<script setup>
+import zhCN from "ant-design-vue/es/locale/zh_CN";
 import DefaultView from "./layout/default/index.vue";
-export default {
-  components: {
-    DefaultView
-  },
-  setup() {
-    // let { proxy } = getCurrentInstance();
-
-    // let data = reactive({
-    //   name: "hello"
-    // });
-
-    // onMounted(() => {
-    //   console.log(proxy.$axios);
-    // });
-
-    // return { data, proxy };
-  }
-};
+import { ref } from "vue";
+const locale = ref(zhCN);
 </script>
 
 <style>
