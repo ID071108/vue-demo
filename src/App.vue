@@ -9,6 +9,19 @@ import DefaultView from "./layout/default/index.vue";
 export default {
   components: {
     DefaultView
+  },
+  setup() {
+    // let { proxy } = getCurrentInstance();
+
+    // let data = reactive({
+    //   name: "hello"
+    // });
+
+    // onMounted(() => {
+    //   console.log(proxy.$axios);
+    // });
+
+    // return { data, proxy };
   }
 };
 </script>
