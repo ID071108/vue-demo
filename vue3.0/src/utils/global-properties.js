@@ -9,7 +9,7 @@
  */
 import momont from "moment";
 import { message } from "ant-design-vue";
-import { get, post, put, del, uploader } from "/@/utils/http";
+import { get, post, put, del, uploader } from "/@/http";
 
 export function setGlobalProperties(app) {
   // configure message component
