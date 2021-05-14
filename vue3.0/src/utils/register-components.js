@@ -5,7 +5,7 @@
  * @modifier     : shuwang.wu@getech.cn
  * @modifiedDate : 2021-03-03 18:56:06
  * @reason       : register-components
- * @FilePath     : \vite-demo\src\utils\register-components.js
+ * @FilePath: \vue3.0\src\utils\register-components.js
  */
 
 import {
