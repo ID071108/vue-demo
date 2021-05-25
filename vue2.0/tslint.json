@@ -1,6 +1,9 @@
 {
-    "extends": "tslint-config-standard",
-    "globals": {
-        "require": true
-    }
+  "extends": "tslint-config-standard",
+  "globals": {
+    "require": true
+  },
+  "rules": {
+    "space-before-function-paren": ["error", "never"]
+  }
 }

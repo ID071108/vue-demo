@@ -1,43 +1,45 @@
-/* eslint-disable */ 
-"use strict";
-const path = require("path");
-const utils = require("./utils");
-const config = require("../config");
-const vueLoaderConfig = require("./vue-loader.conf");
+/* eslint-disable */
+
+'use strict'
+const path = require('path')
+const utils = require('./utils')
+const config = require('../config')
+const vueLoaderConfig = require('./vue-loader.conf')
+const tsImportPluginFactory = require('ts-import-plugin')
 
 function resolve(dir) {
-  return path.join(__dirname, "..", dir);
+  return path.join(__dirname, '..', dir)
 }
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
-  loader: "eslint-loader",
-  enforce: "pre",
-  include: [resolve("src"), resolve("test")],
+  loader: 'eslint-loader',
+  enforce: 'pre',
+  include: [resolve('src'), resolve('test')],
   options: {
-    formatter: require("eslint-friendly-formatter"),
+    formatter: require('eslint-friendly-formatter'),
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
-});
+})
 
 module.exports = {
-  context: path.resolve(__dirname, "../"),
+  context: path.resolve(__dirname, '../'),
   entry: {
-    app: "./src/main.ts"
+    app: './src/main.ts'
   },
   output: {
     path: config.build.assetsRoot,
-    filename: "[name].js",
+    filename: '[name].js',
     publicPath:
-      process.env.NODE_ENV === "production"
+      process.env.NODE_ENV === 'production'
         ? config.build.assetsPublicPath
         : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: [".js", ".vue", ".json", ".ts"],
+    extensions: ['.js', '.vue', '.json', '.ts'],
     alias: {
-      vue$: "vue/dist/vue.esm.js",
-      "@": resolve("src")
+      vue$: 'vue/dist/vue.esm.js',
+      '@': resolve('src')
     }
   },
   module: {
@@ -45,54 +47,89 @@ module.exports = {
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.vue$/,
-        loader: "vue-loader",
+        loader: 'vue-loader',
         options: vueLoaderConfig
       },
-      {
-        test: /\.js$/,
-        loader: "babel-loader",
-        include: [
-          resolve("src"),
-          resolve("test"),
-          resolve("node_modules/webpack-dev-server/client")
-        ]
-      },
       // {
-      //   test: /\.ts$/,
-      //   exclude: /node_modules/,
-      //   enforce: "pre",
-      //   loader: "tslint-loader"
+      //   test: /\.js$/,
+      //   loader: 'babel-loader',
+      //   include: [
+      //     resolve('src'),
+      //     resolve('test'),
+      //     resolve('node_modules/webpack-dev-server/client')
+      //   ]
       // },
       {
-        test: /\.tsx?$/,
-        loader: "ts-loader",
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 }
+          },
+          'postcss-loader'
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          // creates style nodes from JS strings
+          {
+            loader: 'vue-style-loader'
+          },
+          // translates CSS into CommonJS
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'less-loader'
+          }
+        ]
+      },
+      {
+        test: /\.(jsx|tsx|js|ts)$/,
+        loader: 'ts-loader',
         exclude: /node_modules/,
         options: {
-          appendTsSuffixTo: [/\.vue$/]
-        }
+          appendTsSuffixTo: [/\.vue$/],
+          transpileOnly: true,
+          getCustomTransformers: () => ({
+            before: [
+              tsImportPluginFactory({
+                libraryName: 'vant',
+                libraryDirectory: 'es',
+                style: false
+              }),
+            ]
+          }),
+          compilerOptions: {
+            module: 'es2015'
+          }
+        },
+        exclude: /node_modules/
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath("img/[name].[hash:7].[ext]")
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath("media/[name].[hash:7].[ext]")
+          name: utils.assetsPath('media/[name].[hash:7].[ext]')
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath("fonts/[name].[hash:7].[ext]")
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
     ]
@@ -103,10 +140,10 @@ module.exports = {
     setImmediate: false,
     // prevent webpack from injecting mocks to Node native modules
     // that does not make sense for the client
-    dgram: "empty",
-    fs: "empty",
-    net: "empty",
-    tls: "empty",
-    child_process: "empty"
+    dgram: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    child_process: 'empty'
   }
-};
+}

@@ -1,15 +1,15 @@
 <!--
  * @Author: shuwang_wu
  * @Date: 2021-05-13 09:55:35
- * @LastEditTime: 2021-05-14 15:18:45
+ * @LastEditTime: 2021-05-25 19:26:56
  * @LastEditors: shuwang_wu
  * @Description: hello.vue
  * @FilePath: \vue2.0\src\components\HelloWorld.vue
 -->
 <template>
   <div class="hello-world">
-    <DatePicker />
-    <div>Hello, {{ name }}</div>
+    <!-- <Button type="primary">主要按钮</Button> -->
+    <van-button type="primary" @click="onClick">主要按钮</van-button>
   </div>
 </template>
 
@@ -17,21 +17,22 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
-import { DatePicker } from 'ant-design-vue'
 
 @Component({
-  components: {
-    DatePicker
-  }
+  components: {}
 })
 export default class HelloWorld extends Vue {
   @Prop({ default: 'stranger' })
   name: string
+
+  onClick(): void {
+    console.log(123)
+  }
 }
 </script>
 
-<style>
+<style lang="less">
 .hello-world {
-  background-color: #eee;
+  background-color: #aaa;
 }
 </style>
