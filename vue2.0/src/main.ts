@@ -1,7 +1,7 @@
 /*
  * @Author: shuwang_wu
  * @Date: 2021-05-13 09:55:35
- * @LastEditTime: 2021-05-25 17:19:58
+ * @LastEditTime: 2021-05-26 14:55:51
  * @LastEditors: shuwang_wu
  * @Description: main.ts
  * @FilePath: \vue2.0\src\main.ts
@@ -19,7 +19,8 @@ import RegisterComponents from '@/utils/register-components.ts'
 RegisterComponents(Vue)
 
 import FastClick from 'fastclick'
-const fastClickInst = new FastClick(document.body)
+// tslint:disable-next-line
+new FastClick(document.body)
 
 // tslint:disable-next-line
 new Vue({

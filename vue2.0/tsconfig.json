@@ -2,6 +2,7 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "baseUrl": "./",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "allowJs": true,
@@ -11,6 +12,11 @@
     "isolatedModules": true,
     "lib": ["dom", "es5", "es2015.promise"],
     "sourceMap": true,
-    "pretty": true
+    "pretty": true,
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "importHelpers": true,
+    "esModuleInterop": true
   }
 }

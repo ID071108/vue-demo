@@ -46,47 +46,6 @@ module.exports = {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig
-      },
-      // {
-      //   test: /\.js$/,
-      //   loader: 'babel-loader',
-      //   include: [
-      //     resolve('src'),
-      //     resolve('test'),
-      //     resolve('node_modules/webpack-dev-server/client')
-      //   ]
-      // },
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          {
-            loader: 'css-loader',
-            options: { importLoaders: 1 }
-          },
-          'postcss-loader'
-        ]
-      },
-      {
-        test: /\.less$/,
-        use: [
-          // creates style nodes from JS strings
-          {
-            loader: 'vue-style-loader'
-          },
-          // translates CSS into CommonJS
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'less-loader'
-          }
-        ]
-      },
-      {
         test: /\.(jsx|tsx|js|ts)$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
@@ -98,8 +57,8 @@ module.exports = {
               tsImportPluginFactory({
                 libraryName: 'vant',
                 libraryDirectory: 'es',
-                style: false
-              }),
+                style: true
+              })
             ]
           }),
           compilerOptions: {
@@ -107,6 +66,11 @@ module.exports = {
           }
         },
         exclude: /node_modules/
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: vueLoaderConfig
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

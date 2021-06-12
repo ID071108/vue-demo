@@ -1,16 +1,7 @@
 {
   "plugins": [
     "transform-vue-jsx",
-    "transform-runtime",
-    [
-      "import",
-      {
-        "libraryName": "vant",
-        "libraryDirectory": "es",
-        "style": true
-      }
-    ],
-    "vant"
+    "transform-runtime"
   ],
   "presets": [
     [
